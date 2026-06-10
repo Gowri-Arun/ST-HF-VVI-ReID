@@ -1,6 +1,6 @@
 # ST-HF-VVI-ReID
 
-Faithful reproduction and extension of Spatial-Temporal High-Frequency Learning for Video-based Visible-Infrared Person Re-Identification.
+Faithful  reproduction and extension of Spatial-Temporal High-Frequency Learning for Video-based Visible-Infrared Person Re-Identification.
 
 Status: In progress
 
