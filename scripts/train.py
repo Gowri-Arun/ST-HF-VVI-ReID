@@ -127,15 +127,21 @@ def main():
     if args.debug:
         losses = trainer.training_step(batch)
         print("Debug training step completed successfully.")
-        print(f"  id_loss:           {losses['id_loss'].item():.6f}")
-        print(f"  triplet_loss:      {losses['triplet_loss'].item():.6f}")
-        print(f"  int_id_loss:       {losses['int_id_loss'].item():.6f}")
-        print(f"  int_triplet_loss:  {losses['int_triplet_loss'].item():.6f}")
-        print(f"  total:             {losses['total'].item():.6f}")
+        print(f"  loss_id:           {losses['loss_id'].item():.6f}")
+        print(f"  loss_tri:          {losses['loss_tri'].item():.6f}")
+        print(f"  loss_id_int:       {losses['loss_id_int'].item():.6f}")
+        print(f"  loss_tri_int:      {losses['loss_tri_int'].item():.6f}")
+        print(f"  loss_total:        {losses['loss_total'].item():.6f}")
     elif args.real_data:
         if epochs < 200:
             print("WARNING: Running with fewer than 200 epochs — results are preliminary, not full reproduction.")
         print(f"Training {model_name} for {epochs} epochs (lr={lr}, batch_size={batch_size})")
+        trainer.fit(loader, None, epochs)
+
+        save_dir = train_cfg.get("save_dir", f"experiments/{model_name}")
+        final_path = os.path.join(save_dir, "last.pth")
+        torch.save(model.state_dict(), final_path)
+        print(f"Final model weights saved to {final_path}")
         if args.max_batches is not None:
             print(f"  Smoke-test mode: max {args.max_batches} batch(es) per epoch")
         trainer.fit(loader, None, epochs, max_batches=args.max_batches)

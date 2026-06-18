@@ -26,7 +26,7 @@ class Trainer:
         self.optimizer.zero_grad()
         outputs = self.model(frames, modalities=batch.get("modalities"))
         losses = self.criterion(outputs, pids)
-        total = losses["total"]
+        total = losses["loss_total"]
 
         if not torch.isfinite(total):
             raise RuntimeError(f"Loss is not finite: {total}")
