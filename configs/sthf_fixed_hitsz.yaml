@@ -3,13 +3,14 @@
 
 data:
   root: ./data/hitsz_vcm
-  batch_size: 16
-  num_workers: 4
+  batch_size: 24
+  num_workers: 8
   seq_len: 6
   img_size: [288, 144]
+  pin_memory: true  
 
 sampling:
-  num_ids: 4
+  num_ids: 6
   clips_per_id: 4
 
 model:

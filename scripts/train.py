@@ -173,7 +173,8 @@ def main():
             dataset,
             batch_sampler=sampler,
             collate_fn=collate_video_fn,
-            num_workers=0
+            num_workers=data_cfg.get("num_workers",4),
+            pin_memory=data_cfg.get("pin_memory",True),
         )
 
         print(f"Dataset: {len(dataset)} tracklets")
